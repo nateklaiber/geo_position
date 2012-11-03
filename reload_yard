@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+yardoc "lib/geo_position/**/*.rb" && yard server
