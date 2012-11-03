@@ -13,6 +13,7 @@ module GeoPosition
     #   => -12.061783333333333
     #
     class Dms
+      ALLOWED_DEGREES    = (0.0..360.0)
       ALLOWED_DIRECTIONS = %w( N n E e S s W w )
       MINUTES_CONVERSION = 60
       SECONDS_CONVERSION = 3600
@@ -90,7 +91,7 @@ module GeoPosition
       end
 
       def valid_degrees?(deg)
-        deg.to_f.abs.between?(0.0, 360.0)
+        ALLOWED_DEGREES.include?(deg.to_f.abs)
       end
 
       def convert!
