@@ -13,11 +13,11 @@ module GeoPosition
     #   => -12.061783333333333
     #
     class Dms
+      ALLOWED_MINUTES    = (0.0..60.0)
       ALLOWED_DEGREES    = (0.0..360.0)
       ALLOWED_DIRECTIONS = %w( N n E e S s W w )
       MINUTES_CONVERSION = 60
       SECONDS_CONVERSION = 3600
-
 
       # Creates a new instance of the DMS conversion object
       #
@@ -31,6 +31,7 @@ module GeoPosition
         raise GeoPosition::Error::InvalidDirectionError.new("Please provided a direction of N, S, E, or W") unless valid_direction?(direction)
         raise GeoPosition::Error::InvalidFloatError.new("Arguments could not be coerced to a float") unless valid_floats?([degrees, minutes, seconds])
         raise GeoPosition::Error::InvalidDegreesError.new("Degrees must be between 0 and 360. %s was provided" % [degrees]) unless valid_degrees?(degrees)
+        raise GeoPosition::Error::InvalidMinutesError.new("Minutes must be between 0 and 60. %s was provided" % [minutes]) unless valid_minutes?(minutes)
 
         @degrees = degrees # Can only be between 0 and 360
         @minutes = minutes
@@ -92,6 +93,10 @@ module GeoPosition
 
       def valid_degrees?(deg)
         ALLOWED_DEGREES.include?(deg.to_f.abs)
+      end
+
+      def valid_minutes?(min)
+        ALLOWED_MINUTES.include?(min.to_f.abs)
       end
 
       def convert!

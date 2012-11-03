@@ -23,6 +23,10 @@ describe GeoPosition::Conversion::Dms do
     it "raises an exception if degrees are greater than 360" do
       lambda{ described_class.new(361, 12, 123, 'n') }.should raise_error(GeoPosition::Error::InvalidDegreesError)
     end
+
+    it "raises an exception if minutes are greater than 60" do
+      lambda { described_class.new(12, 61, 12, 'n') }.should raise_error(GeoPosition::Error::InvalidMinutesError)
+    end
   end
 
   it "coerces the degrees to a float" do
