@@ -1,0 +1,1 @@
+rvm use --install --create 1.9.3@geo_position
