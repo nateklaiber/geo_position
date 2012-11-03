@@ -13,11 +13,15 @@ describe GeoPosition::Conversion::Dms do
 
   context('Error Handling') do
     it "raises an exception if invalid direction is given" do
-      lambda { described_class.new(12,12,23,'r') }.should raise_error(GeoPosition::Conversion::Dms::InvalidDirectionError)
+      lambda { described_class.new(12,12,23,'r') }.should raise_error(GeoPosition::Error::InvalidDirectionError)
     end
 
     it "raises an InvalidFloatError if any arguments can't be coerced to a float" do
-      lambda { described_class.new([12], [3], [42.42], 'w') }.should raise_error(GeoPosition::Conversion::Dms::InvalidFloatError)
+      lambda { described_class.new([12], [3], [42.42], 'w') }.should raise_error(GeoPosition::Error::InvalidFloatError)
+    end
+
+    it "raises an exception if degrees are greater than 360" do
+      lambda{ described_class.new(361, 12, 123, 'n') }.should raise_error(GeoPosition::Error::InvalidDegreesError)
     end
   end
 
