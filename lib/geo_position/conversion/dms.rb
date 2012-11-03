@@ -40,26 +40,44 @@ module GeoPosition
         @direction = direction
       end
 
+      # Returns the coerced degrees
+      #
+      # @return [Float] Positive float of the provided degrees
       def degrees
         @degrees.to_f.abs
       end
 
+      # Returns the coerced minutes
+      #
+      # @return [Float]
       def minutes
         @minutes.to_f
       end
 
+      # Returns the coerced seconds
+      #
+      # @return [Float]
       def seconds
         @seconds.to_f
       end
 
+      # Returns the uppercased direction
+      #
+      # @return [String] Uppercase direction
       def direction
         @direction.to_s.upcase
       end
 
+      # Returns the formatted string
+      #
+      # @return [String]
       def to_s
         "%s deg %s' %s\" %s" % [self.degrees.to_i, self.minutes.to_i, self.seconds, self.direction]
       end
 
+      # Returns the converted DMS to a float for use with latitude/longitude
+      #
+      # @return [Float]
       def to_f
         convert!
       end
