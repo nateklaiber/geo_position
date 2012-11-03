@@ -1,6 +1,9 @@
 # GeoPosition
 
-TODO: Write a gem description
+A simple utility to allow you to convert DMS (Degrees, Minutes, Seconds)
+to a latitude and longitude. The initial driver for this utility was
+working on an application that took Geo Position information from EXIF
+data. 
 
 ## Installation
 
@@ -18,7 +21,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Usage is very simple right now:
+
+```ruby
+conversion = GeoPosition::Conversion::Dms.new(12,3,42.2,'w')
+
+conversion.to_s
+=> 12 deg 3' 42.2" W
+
+conversion.to_f
+=> -12.061783333333333
+```
+
+## Todo
+
+* Add ability to parse from the EXIF string and extract into the
+  conversion object
+* Add ability to convert from lat/lon to DMS
+* Add simple methods in the root object to handle conversions
 
 ## Contributing
 
