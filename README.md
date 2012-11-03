@@ -27,11 +27,14 @@ Usage is very simple right now:
 conversion = GeoPosition::Conversion::Dms.new(12,3,42.2,'w')
 
 conversion.to_s
-=> 12 deg 3' 42.2" W
+=> "12 deg 3' 42.2\" W"
 
 conversion.to_f
 => -12.061783333333333
 ```
+
+The only requirement is that you pass in a valid direction of N, S, E,
+or W. Everything else will be coerced to a float.
 
 ## Todo
 
