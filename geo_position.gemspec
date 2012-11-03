@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["nate@theklaibers.com"]
   gem.description   = %q{ A gem that handles conversion between Decimal/Hours/Seconds and Latitude/Longitude }
   gem.summary       = %q{ Converting between Deciman/Hours/Seconds and Latitude/Longitude }
-  gem.homepage      = "http://archivability.com"
+  gem.homepage      = "https://github.com/archivability/geo_position"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
