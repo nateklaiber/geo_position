@@ -42,6 +42,12 @@ describe GeoPosition::Conversion::Dms do
     gp.direction.should == 'N'
   end
 
+  it "takes the first letter of the direction" do
+    gp = described_class.new(12, 12, 12, 'north')
+    gp.direction.should == 'N'
+  end
+
+
   it "returns the formatted string" do
     subject.to_s.should == "12 deg 3' 42.42\" W"
   end

@@ -64,7 +64,7 @@ module GeoPosition
       #
       # @return [String] Uppercase direction
       def direction
-        @direction.to_s.upcase
+        @direction.to_s[0,1].upcase
       end
 
       # Returns the formatted string
