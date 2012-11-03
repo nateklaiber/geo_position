@@ -1,7 +1,3 @@
-# With negative numbers
-# With nil
-# With empty strings
-# With strings
 require 'spec_helper'
 
 describe GeoPosition::Conversion::Dms do
@@ -15,8 +11,14 @@ describe GeoPosition::Conversion::Dms do
     subject.should respond_to(:to_s)
   end
 
-  it "raises an exception if invalid direction is given" do
-    lambda { described_class.new(12,12,23,'r') }.should raise_error(GeoPosition::Conversion::Dms::InvalidDirectionError)
+  context('Error Handling') do
+    it "raises an exception if invalid direction is given" do
+      lambda { described_class.new(12,12,23,'r') }.should raise_error(GeoPosition::Conversion::Dms::InvalidDirectionError)
+    end
+
+    it "raises an InvalidFloatError if any arguments can't be coerced to a float" do
+      lambda { described_class.new([12], [3], [42.42], 'w') }.should raise_error(GeoPosition::Conversion::Dms::InvalidFloatError)
+    end
   end
 
   it "coerces the degrees to a float" do
@@ -42,6 +44,26 @@ describe GeoPosition::Conversion::Dms do
 
   it "returns the floated conversion" do
     subject.to_f.should eql(-12.061783333333333)
+  end
+
+  it "returns 0's if nil is provided" do
+    gp = described_class.new(nil, nil, nil, 'N')
+    gp.to_f.should eql(0.0)
+  end
+
+  it "returns 0's if empty strings are provided" do
+    gp = described_class.new('', '', '', 'N')
+    gp.to_f.should eql(0.0)
+  end
+
+  it "ensures the degrees are always positive" do
+    gp = described_class.new(-12, 3, 42.42, 'w')
+    gp.to_f.should eql(-12.061783333333333)
+  end
+
+  it "coerces string arguments to floats" do
+    gp = described_class.new('12', '3', '42.42', 'w')
+    gp.to_f.should eql(-12.061783333333333)
   end
 
   context("North") do

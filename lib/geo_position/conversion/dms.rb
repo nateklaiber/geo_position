@@ -15,6 +15,7 @@ module GeoPosition
     class Dms
       # Error that is raised if invalid directions are provided
       InvalidDirectionError = Class.new(StandardError)
+      InvalidFloatError     = Class.new(StandardError)
 
       ALLOWED_DIRECTIONS = %w( N n E e S s W w )
       MINUTES_CONVERSION = 60
@@ -30,6 +31,7 @@ module GeoPosition
       # @return [void]
       def initialize(degrees, minutes, seconds, direction)
         raise InvalidDirectionError.new("Please provided a direction of N, S, E, or W") unless valid_direction?(direction)
+        raise InvalidFloatError.new("Arguments could not be coerced to a float") unless valid_floats?([degrees, minutes, seconds])
 
         @degrees = degrees
         @minutes = minutes
@@ -39,7 +41,7 @@ module GeoPosition
       end
 
       def degrees
-        @degrees.to_f
+        @degrees.to_f.abs
       end
 
       def minutes
@@ -65,6 +67,10 @@ module GeoPosition
       private
       def valid_direction?(dir)
         ALLOWED_DIRECTIONS.include?(dir[0,1])
+      end
+
+      def valid_floats?(collection)
+        collection.all? { |arg| arg.respond_to?(:to_f) }
       end
 
       def convert!
