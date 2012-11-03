@@ -3,7 +3,8 @@
 A simple utility to allow you to convert DMS (Degrees, Minutes, Seconds)
 to a latitude and longitude. The initial driver for this utility was
 working on an application that took Geo Position information from EXIF
-data. 
+data and converted it to lat/lon for use in both the database storage
+and querying Google's API.
 
 ## Installation
 
@@ -21,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-Usage is very simple right now:
+I prefer smaller components that can be put together in different ways.
+
+Usage is simple:
 
 ```ruby
 # This can be any positive number between 0 and 360. It will be coerced
