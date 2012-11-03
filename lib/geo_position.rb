@@ -3,6 +3,9 @@ root = File.expand_path(File.dirname(__FILE__))
 # Version
 require File.join(root, 'geo_position', 'version')
 
+# Errors
+require File.join(root, 'geo_position', 'error')
+
 # Conversions
 require File.join(root, 'geo_position', 'conversion')
 require File.join(root, 'geo_position', 'conversion', 'dms')
