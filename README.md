@@ -30,8 +30,8 @@ it will raise an exception.
 
 For the conversions, there are some expectations:
 
-* For latitude, you must provide an argument within the boungs of `-90` and `90`.
-* For longitude, you must provide an argument within the boungs of `-180` and `180`.
+* For latitude, you must provide an argument within the bounds of `-90` and `90`.
+* For longitude, you must provide an argument within the bounds of `-180` and `180`.
 
 You can see more information in the objects and errors themselves.
 
