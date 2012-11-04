@@ -40,8 +40,7 @@ Usage is simple:
 ### Convert from Degrees, Minutes, Seconds, and Direction to a float
 
 ```ruby
-# This can be any positive number between 0 and 360. It will be coerced
-# to a float and absoluted.
+# This can be any positive number between 0 and 360. It will be coerced to a float and absoluted.
 degrees = 12
 
 # Minutes
@@ -53,8 +52,7 @@ seconds = 42.42
 # Direction must be one of N, S, E, or W
 direction = 'w'
 
-conversion = GeoPosition::Conversion::Dms.new(degrees, minutes, seconds,
-direction)
+conversion = GeoPosition::Conversion::Dms.new(degrees, minutes, seconds, direction)
 
 conversion.to_s
 => "12 deg 3' 42.42\" W"
@@ -104,8 +102,6 @@ parser.direction
 parser.to_hash
 => {:degrees=>77, :minutes=>8, :seconds=>42.0, :direction=>"W"}
 ```
-
-
 
 ## Todo
 
