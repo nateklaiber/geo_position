@@ -72,6 +72,30 @@ conversion.to_s
 => "157 deg 26' 27\" W"
 ```
 
+### Parsing from a DMS string
+```ruby
+dms_string = "77 deg 8 42.00 W"
+
+parser = GeoPosition::Parser::Dms.new(dms_string)
+
+parser.degrees
+=> 77
+
+parser.minutes
+=> 8
+
+parser.seconds
+=> 42.0
+
+parser.direction
+=> "W"
+
+parser.to_hash
+=> {:degrees=>77, :minutes=>8, :seconds=>42.0, :direction=>"W"}
+```
+
+
+
 ## Todo
 
 * Add a command line component
