@@ -20,12 +20,16 @@ describe GeoPosition::Conversion::Dms do
       lambda { described_class.new([12], [3], [42.42], 'w') }.should raise_error(GeoPosition::Error::InvalidFloatError)
     end
 
-    it "raises an exception if degrees are greater than 360" do
-      lambda{ described_class.new(361, 12, 123, 'n') }.should raise_error(GeoPosition::Error::InvalidDegreesError)
+    it "raises an exception if degrees are greater than 180" do
+      lambda{ described_class.new(181, 12, 123, 'n') }.should raise_error(GeoPosition::Error::InvalidDegreesError)
     end
 
     it "raises an exception if minutes are greater than 60" do
       lambda { described_class.new(12, 61, 12, 'n') }.should raise_error(GeoPosition::Error::InvalidMinutesError)
+    end
+
+    it "raises an exception if seconds are greater than 60" do
+      lambda { described_class.new(12, 30, 61, 'n') }.should raise_error(GeoPosition::Error::InvalidSecondsError)
     end
   end
 

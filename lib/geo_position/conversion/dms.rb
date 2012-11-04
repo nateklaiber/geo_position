@@ -13,8 +13,8 @@ module GeoPosition
     #   => -12.061783333333333
     #
     class Dms
-      ALLOWED_MINUTES    = (0.0..60.0)
-      ALLOWED_DEGREES    = (0.0..360.0)
+      ALLOWED_SECONDS    = (0.0..60.0)
+      ALLOWED_DEGREES    = (0.0..180.0)
       ALLOWED_DIRECTIONS = %w( N n E e S s W w )
       MINUTES_CONVERSION = 60
       SECONDS_CONVERSION = 3600
@@ -32,8 +32,9 @@ module GeoPosition
         raise GeoPosition::Error::InvalidFloatError.new("Arguments could not be coerced to a float") unless valid_floats?([degrees, minutes, seconds])
         raise GeoPosition::Error::InvalidDegreesError.new("Degrees must be between 0 and 360. %s was provided" % [degrees]) unless valid_degrees?(degrees)
         raise GeoPosition::Error::InvalidMinutesError.new("Minutes must be between 0 and 60. %s was provided" % [minutes]) unless valid_minutes?(minutes)
+        raise GeoPosition::Error::InvalidSecondsError.new("Seonds must be between 0 and 60. %s was provided" % [seconds]) unless valid_seconds?(seconds)
 
-        @degrees = degrees # Can only be between 0 and 360
+        @degrees = degrees
         @minutes = minutes
         @seconds = seconds
 
@@ -96,12 +97,16 @@ module GeoPosition
       end
 
       def valid_minutes?(min)
-        ALLOWED_MINUTES.include?(min.to_f.abs)
+        ALLOWED_SECONDS.include?(min.to_f.abs)
+      end
+
+      def valid_seconds?(sec)
+        ALLOWED_SECONDS.include?(sec.to_f.abs)
       end
 
       def convert!
         result = (self.degrees + ((self.minutes/MINUTES_CONVERSION) + (self.seconds/SECONDS_CONVERSION)))
-        if negative? then -(result) else result end
+        if negative? then (result * -1) else result end
       end
 
       def negative?
