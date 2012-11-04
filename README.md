@@ -24,6 +24,17 @@ Or install it yourself as:
 
 I prefer smaller components that can be put together in different ways.
 
+Currently, if given arguments other than something numeric, then the
+argument will be coerced to a float. If it cannot be coerced to a float,
+it will raise an exception.
+
+For the conversions, there are some expectations:
+
+* For latitude, you must provide an argument within the boungs of `-90` and `90`.
+* For longitude, you must provide an argument within the boungs of `-180` and `180`.
+
+You can see more information in the objects and errors themselves.
+
 Usage is simple:
 
 ### Convert from Degrees, Minutes, Seconds, and Direction to a float
