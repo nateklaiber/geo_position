@@ -26,6 +26,8 @@ I prefer smaller components that can be put together in different ways.
 
 Usage is simple:
 
+### Convert from Degrees, Minutes, Seconds, and Direction to a float
+
 ```ruby
 # This can be any positive number between 0 and 360. It will be coerced
 # to a float and absoluted.
@@ -50,12 +52,28 @@ conversion.to_f
 => -12.061783333333333
 ```
 
+### Convert from Latitude to DMS
+```ruby
+latitude = "70.4947"
+
+conversion = GeoPosition::Conversion::Latitude.new(latitude)
+
+conversion.to_s
+=> "70 deg 29' 40\" N"
+```
+
+### Convert from Longitude to DMS
+```ruby
+longitude = "-157.441"
+
+conversion = GeoPosition::Conversion::Longitude.new(longitude)
+
+conversion.to_s
+=> "157 deg 26' 27\" W"
+```
+
 ## Todo
 
-* Add ability to parse from the EXIF string and extract into the
-  conversion object
-* Add ability to convert from lat/lon to DMS
-* Add simple methods in the root object to handle conversions
 * Add a command line component
 
 ## Contributing
