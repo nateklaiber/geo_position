@@ -1,8 +1,24 @@
 module GeoPosition
   module Conversion
+    # This is the main class that will convert from latitude into
+    # Degrees, Minutes, Seconds, and Direction
+    #
+    # @example
+    #   latitude = "70.4947"
+    #
+    #   conversion = GeoPosition::Conversion::Latitude.new(latitude)
+    #
+    #   conversion.to_s
+    #   => "70 deg 29' 40\" N"
+    #
     class Latitude
       BOUNDS = (-90.0..90.0)
 
+      # Creates a new instance of the Latitude conversion object
+      #
+      # @param latitude [String,Numeric]
+      #
+      # @return [void]
       def initialize(latitude)
         raise GeoPosition::Error::InvalidFloatError.new("Arguments could not be coerced to a float") unless valid_float?(latitude)
         raise GeoPosition::Error::InvalidLatitudeError.new("Latitde must be between -90 and 90 degrees: %s provided" % [latitude]) unless within_bounds?(latitude)
@@ -16,6 +32,7 @@ module GeoPosition
         convert!
       end
 
+      # Returns the degrees
       def degrees
         @degrees
       end

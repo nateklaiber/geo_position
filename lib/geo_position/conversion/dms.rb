@@ -1,7 +1,7 @@
 module GeoPosition
   module Conversion
     # This is the main class that will perform the conversion from 
-    # Degrees, Minutes, and Seconds
+    # Degrees, Minutes, Seconds, and Direction
     #
     # @example
     #   conversion = GeoPosition::Conversion::Dms.new(12,3,42.2,'w')
