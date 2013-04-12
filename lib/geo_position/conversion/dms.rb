@@ -30,9 +30,9 @@ module GeoPosition
       def initialize(degrees, minutes, seconds, direction)
         raise GeoPosition::Error::InvalidDirectionError.new("Please provided a direction of N, S, E, or W") unless valid_direction?(direction)
         raise GeoPosition::Error::InvalidFloatError.new("Arguments could not be coerced to a float") unless valid_floats?([degrees, minutes, seconds])
-        raise GeoPosition::Error::InvalidDegreesError.new("Degrees must be between 0 and 360. %s was provided" % [degrees]) unless valid_degrees?(degrees)
+        raise GeoPosition::Error::InvalidDegreesError.new("Degrees must be between 0 and 180. %s was provided" % [degrees]) unless valid_degrees?(degrees)
         raise GeoPosition::Error::InvalidMinutesError.new("Minutes must be between 0 and 60. %s was provided" % [minutes]) unless valid_minutes?(minutes)
-        raise GeoPosition::Error::InvalidSecondsError.new("Seonds must be between 0 and 60. %s was provided" % [seconds]) unless valid_seconds?(seconds)
+        raise GeoPosition::Error::InvalidSecondsError.new("Seconds must be between 0 and 60. %s was provided" % [seconds]) unless valid_seconds?(seconds)
 
         @degrees = degrees
         @minutes = minutes
